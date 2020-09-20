@@ -9,6 +9,7 @@ MiroBoard: https://miro.com/app/board/o9J_kkh1i50=/
 
 WallstreetBets Subreddit: https://reddit.com/r/wallstreetbets
 
+Firebase Project: https://console.firebase.google.com/project/hen-in-a-bullhouse/
 
 ## TODOs
 
