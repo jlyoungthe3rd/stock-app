@@ -1,0 +1,19 @@
+{
+  "name": "stock-app",
+  "version": "1.0.0",
+  "description": "Look at WSB stock thread performance over the week",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlyoungthe3rd/stock-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlyoungthe3rd/stock-app/issues"
+  },
+  "homepage": "https://github.com/jlyoungthe3rd/stock-app#readme"
+}
