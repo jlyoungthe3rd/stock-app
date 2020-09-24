@@ -32,33 +32,59 @@ const redditClient = require("./src/reddit");
  * On request, it needs to:
  *   1. authenticate
  *   2. touch the wallstreetbets subreddit for a given flair
- *   3. return posts with that flair (top ten in the last week)
+ *   3. return postxs with that flair (top ten in the last week)
  */
 describe("Reddit API pulling", () => {
+  const request = {
+    params: [],
+  };
+  const response = {
+    send: jest.fn(),
+  };
+
+  beforeEach(() => {
+    Subreddit.search.mockRestore();
+    Subreddit.search.mockImplementation(() => Promise.resolve("data"))
+  });
+
   it("should import functions from the src folder and export them", () => {
     expect(baseFunctions.reddit).toBe(redditClient);
   });
 
   it("should load in authentication details", () => {
+    baseFunctions.reddit.searchDD(request, response);
     // create a new snoowrap instance called with firebase func variables
-    expect(snoowrap).toHaveBeenCalledWith(firebaseFunctions.config().reddit);
+    const {
+      user_agent: userAgent,
+      client_id: clientId,
+      client_secret: clientSecret,
+      refresh_token: refreshToken,
+    } = firebaseFunctions.config().reddit;
+    expect(snoowrap).toHaveBeenCalledWith({
+      userAgent,
+      clientId,
+      clientSecret,
+      refreshToken,
+    });
   });
 
   it("should return submission from r/wallstreetbets subreddit", () => {
-    const listings = [];
-    Subreddit.search.mockImplementation(() => listings);
-    const response = {
-        send: jest.fn()
-    };
-    baseFunctions.reddit.searchDD(null, response);
+    const listings = [Math.random()];
+    Subreddit.search.mockImplementation(() => Promise.resolve(listings));
 
-    expect(SnoowrapClient.getSubreddit).toHaveBeenCalledWith("wallstreetbets");
-    expect(Subreddit.search).toHaveBeenCalledWith({
-      q: "flair:DD",
-      sort: "top",
-      time: "week",
-    });
+    expect(Subreddit.search).toHaveBeenCalledTimes(0);
 
-    expect(response.send).toHaveBeenCalledWith(listings);
+    baseFunctions.reddit.searchDD(request, response);
+
+    setTimeout(() => {
+      expect(SnoowrapClient.getSubreddit).toHaveBeenCalledWith("wallstreetbets");
+      expect(Subreddit.search).toHaveBeenCalledWith({
+        q: "flair:DD",
+        sort: "top",
+        time: "week",
+      });
+  
+      expect(response.send).toHaveBeenCalledWith(listings);
+    }, 500);
   });
 });
