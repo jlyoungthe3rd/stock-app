@@ -21,16 +21,19 @@ const getSnoowrap = () => {
 
 exports.searchDD = functions.https.onRequest((request, response) => {
   const reddit = getSnoowrap();
+
+  response.set('Access-Control-Allow-Origin', '*');
   
   reddit
     .getSubreddit("wallstreetbets")
     .search({
-      q: "flair:DD",
+      query: "flair:DD",
       sort: "top",
       time: "week",
     })
     .then((listings) => {
-      response.send(listings);
+      const mylistings = listings.map(({ selftext_html, title }) => ({ selftext_html, title }))
+      return response.send(mylistings);
     })
     .catch((ex) => {
       logger("Failed to run search: ", ex.statusCode);

@@ -13,9 +13,9 @@ Firebase Project: https://console.firebase.google.com/project/hen-in-a-bullhouse
 
 ## TODOs
 
-1. Create a function as a service (endpoint) that will retrieve wallstreet bets threads
-2. Create an interface to view each thread in a list form
-3. Create a function as a service that will retrrive stock data from a list of symbols
+1. ~~Create a function as a service (endpoint) that will retrieve wallstreet bets threads~~
+2. ~~Create an interface to view each thread in a list form~~
+3. Create a function as a service that will retrive stock data from a list of symbols
 4. Create an interface to view each symbol
     - size relative to market cap
     - height realtive to the difference in price from the beginning of the week to current day

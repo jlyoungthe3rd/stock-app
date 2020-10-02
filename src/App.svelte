@@ -1,11 +1,9 @@
 <script>
-	export let name;
+	let redditData = fetch('https://us-central1-hen-in-a-bullhouse.cloudfunctions.net/reddit-searchDD')
+		 .then(res => res.json());
+		 
+	let threadList = [];
 </script>
-
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
 
 <style>
 	main {
@@ -28,3 +26,22 @@
 		}
 	}
 </style>
+
+<main>
+	{#await redditData}
+		<span>Awaiting some data.</span>
+	{:then threadList}
+		<ul>
+		{#each threadList as thread}
+			<li>
+				<p>{thread.title}</p>
+				<p>{@html thread.selftext_html}</p>
+			</li>
+		{:else}
+			<li>
+				<span>no threads!</span>
+			</li>
+		{/each}
+		</ul>
+	{/await}
+</main>
