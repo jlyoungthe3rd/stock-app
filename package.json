@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Look at WSB stock thread performance over the week",
   "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public",
     "test": "jest"
   },
   "repository": {
@@ -17,6 +20,16 @@
   },
   "homepage": "https://github.com/jlyoungthe3rd/stock-app#readme",
   "devDependencies": {
-    "jest": "^26.4.2"
+    "jest": "^26.4.2",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.0.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^6.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0"
+  },
+  "dependencies": {
+    "sirv-cli": "^1.0.0"
   }
 }
