@@ -3,6 +3,11 @@
 		 .then(res => res.json());
 		 
 	let threadList = [];
+
+	let stockTickerList = [];
+	
+	const stockTicker = new RegExp(/[A-Z]{1,4}/g)
+
 </script>
 
 <style>
@@ -32,10 +37,13 @@
 		<span>Awaiting some data.</span>
 	{:then threadList}
 		<ul>
-		{#each threadList as thread}
+		{#each threadList.slice(0, 10) as thread}
 			<li>
-				<p>{thread.title}</p>
-				<p>{@html thread.selftext_html}</p>
+				<h2>{thread.title}</h2>
+				<h2>{thread.selftext_html.match(stockTicker) }</h2>
+				<span>{@html thread.selftext_html}</span>
+				<h2>{thread.author}</h2>
+				<h2>{thread.ups}:{thread.downs}, {thread.upvote_ratio}</h2>
 			</li>
 		{:else}
 			<li>

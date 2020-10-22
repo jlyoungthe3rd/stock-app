@@ -31,9 +31,8 @@ exports.searchDD = functions.https.onRequest((request, response) => {
       sort: "top",
       time: "week",
     })
-    .then((listings) => {
-      const mylistings = listings.map(({ selftext_html, title }) => ({ selftext_html, title }))
-      return response.send(mylistings);
+    .then((submissions) => {
+      return response.send(submissions.slice(0, 10));
     })
     .catch((ex) => {
       logger("Failed to run search: ", ex.statusCode);
