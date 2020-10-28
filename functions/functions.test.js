@@ -79,7 +79,7 @@ describe("Reddit API pulling", () => {
     setTimeout(() => {
       expect(SnoowrapClient.getSubreddit).toHaveBeenCalledWith("wallstreetbets");
       expect(Subreddit.search).toHaveBeenCalledWith({
-        q: "flair:DD",
+        query: "flair:DD",
         sort: "top",
         time: "week",
       });
